@@ -13,7 +13,8 @@ export const getStaticProps = async () => {
   const featuredEvents = await getFeaturedEvents();
 
   return {
-    props: { featuredEvents }
+    props: { featuredEvents },
+    revalidate: 1800
   };
 };
 
