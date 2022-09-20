@@ -27,20 +27,20 @@ export const getFilteredEvents = async (year, month) => {
   const start = `${year}-${month}-1`;
   const end = `${year}-${month}-${days}`;
 
-  const res = await fetch(`${process.env.FIREBASE_URL}/events.json?orderBy="date"&startAt="${start}"&endAt="${end}"`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_FIREBASE_URL}/events.json?orderBy="date"&startAt="${start}"&endAt="${end}"`);
   const data = await res.json();
   const events = getEventArray(data);
 
   return events;
 };
 
-const getEventArray = eventObject => {
+export const getEventArray = eventObject => {
   return Object.keys(eventObject).map(key => ({
     id: key,
     ...eventObject[key]
   }));
 };
 
-const getDaysInMonth = (year, month) => {
+export const getDaysInMonth = (year, month) => {
   return new Date(year, month, 0).getDate();
 };
