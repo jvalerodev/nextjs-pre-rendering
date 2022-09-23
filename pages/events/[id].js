@@ -1,3 +1,4 @@
+import SEO from '../../components/SEO';
 import EventContent from '../../components/eventDetail/EventContent';
 import EventLogistics from '../../components/eventDetail/EventLogistics';
 import EventSummary from '../../components/eventDetail/EventSummary';
@@ -14,6 +15,8 @@ const Event = ({ event }) => {
 
   return (
     <>
+      <SEO title={event.title} description={event.description} />
+
       <EventSummary title={event.title} />
 
       <EventLogistics

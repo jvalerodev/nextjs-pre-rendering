@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import SEO from '../../components/SEO';
 import EventList from '../../components/events/EventList';
 import ResultsTitle from '../../components/events/ResultsTitle';
 import Button from '../../components/ui/Button';
@@ -22,8 +23,14 @@ const FilteredEvents = () => {
     getEvents();
   }, [slug]);
 
+
   if (!filteredEvents) {
-    return <p className="center">Loading...</p>;
+    return (
+      <>
+        <SEO title="Filtered Events" description="A list of filtered events." />
+        <p className="center">Loading...</p>
+      </>
+    );
   }
 
   const year = Number(slug[0]);
@@ -32,9 +39,12 @@ const FilteredEvents = () => {
   if (isNaN(year) || isNaN(month) || year > 2030 || year < 2021 || month < 1 || month > 12) {
     return (
       <>
+        <SEO title="Filtered Events" description={`All events for ${month}/${year}`} />
+
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
+
         <div className="center">
           <Button link="/events">Show All Events</Button>
         </div>
@@ -45,9 +55,12 @@ const FilteredEvents = () => {
   if (filteredEvents.length === 0) {
     return (
       <>
+        <SEO title="Filtered Events" description={`All events for ${month}/${year}`} />
+
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
+
         <div className="center">
           <Button link="/events">Show All Events</Button>
         </div>
@@ -59,6 +72,7 @@ const FilteredEvents = () => {
 
   return (
     <>
+      <SEO title="Filtered Events" description={`All events for ${month}/${year}`} />
       <ResultsTitle date={date} />
       <EventList events={filteredEvents} />
     </>
